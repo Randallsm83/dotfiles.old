@@ -109,7 +109,12 @@ set showfulltag
 
 au BufEnter *.py set ai sw=4 ts=4 tw=76 sta et fo=croql
 au BufEnter *.pm,*.pl,*.tp set tw=0
+
+" Ruby
 au BufEnter *.ruby set sw=2 ts=2 sts=2
+autocmd BufNewFile,BufRead Gemfile set filetype=ruby
+autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+autocmd BufNewFile,BufRead Berksfile set filetype=ruby
 
 " Enable syntastic for perl
 let g:syntastic_perl_checkers = ['perl']

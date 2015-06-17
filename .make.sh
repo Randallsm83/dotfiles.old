@@ -9,7 +9,7 @@
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 vundledir=~/dotfiles/.vim/bundle/Vundle.vim
-files="vimrc vim zshrc oh-my-zsh tmux.conf aliases bashrc"    # list of files/folders to symlink in homedir
+files="vimrc vim zshrc oh-my-zsh tmux.conf tmux tmux-powerlinerc aliases bashrc"    # list of files/folders to symlink in homedir
 
 ##########
 

@@ -27,6 +27,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-perl/vim-perl'
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'bling/vim-airline'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -77,9 +79,10 @@ highligh ExtraWhitespace ctermbg=white guibg=white
 
 " Set colorscheme
 set t_Co=256
-colorscheme molokai
-let g:molokai_original = 1
-let g:rehash256 = 1
+colorscheme dracula
+"colorscheme molokai
+"let g:molokai_original = 1
+"let g:rehash256 = 1
 
 " Set vim-airline theme
 let g:airline_theme='wombat'

@@ -9,7 +9,7 @@ export LANG=en_US.UTF-8
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="amuse"
+ZSH_THEME="dracula"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -86,7 +86,7 @@ esac
 if [[ $machine_type != ':ndn' ]]; then
 
 # source perlbrew
-source ~/perl5/perlbrew/etc/bashrc
+#source ~/perl5/perlbrew/etc/bashrc
 
 # local::lib
 # eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)

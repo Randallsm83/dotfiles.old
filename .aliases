@@ -1,5 +1,7 @@
 alias yakko='ssh rmiller@yakko.sd.dreamhost.com -t tmux a'
 alias fubar='ssh rmiller@fubar.dreamhost.com -t tmux a'
+alias zrc='vi ~/.zshrc'
+alias szrc='source ~/.zshrc'
 alias vi='vim'
 alias gg='git grep -E'
 ggm() { gg $* -- '*.pm' }

@@ -106,16 +106,22 @@ set wrap 			" Wrap lines
 set cindent
 set showmatch
 set showfulltag
+
+" General
 set tabstop=4 shiftwidth=4 softtabstop=0 noexpandtab autoindent
 
-au BufEnter *.py set ai sw=4 ts=4 tw=76 sta et fo=croql
+" Perl
 au BufEnter *.pm,*.pl,*.tp set tw=0
 
+" Python
+au BufEnter *.py set ai sw=4 ts=4 tw=76 sta et fo=croql
+
 " Ruby
-au BufEnter *.ruby set sw=2 ts=2 sts=2
-autocmd BufNewFile,BufRead Gemfile set filetype=ruby
-autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
-autocmd BufNewFile,BufRead Berksfile set filetype=ruby
+au BufEnter *.ruby,*.rb set sw=2 ts=2 sts=2
+autocmd FileType ruby,rdoc,cucumber,yaml set sts=2 tabstop=2 sw=2
+autocmd BufNewFile,BufRead Gemfile setfiletype ruby
+autocmd BufNewFile,BufRead Berksfile setfiletype ruby
+autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
 
 " Enable syntastic for perl
 let g:syntastic_perl_checkers = ['perl']

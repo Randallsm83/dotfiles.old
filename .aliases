@@ -1,4 +1,5 @@
 alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"
+alias jsbin="nvm use 0.10.48 && ~/jsbin/bin/jsbin"
 
 alias yakko='ssh rmiller@yakko.sd.dreamhost.com -t /home/rmiller/local/bin/tmux a'
 alias fubar='ssh rmiller@fubar.dreamhost.com -t /home/rmiller/local/bin/tmux a'
@@ -68,4 +69,4 @@ alias mysc="${DEV_ENV} ${HOME}/ndn/dh/bin/servicectl"
 alias scdb="${DEV_ENV} perl -d ${HOME}/ndn/dh/bin/servicectl"
 alias domy="${DEV_ENV}"
 alias scdb="/usr/bin/sudo /usr/bin/env PERL5DB='BEGIN { require \"perl5db.pl\"; push @DB::typeahead, \"b 813\"; }' DH_TEMPLATE_PREFIX=/home/rmiller/ndn PERLLIB=/home/rmiller/ndn/perl/ perl -d /home/rmiller/ndn/dh/bin/servicectl"
-alias test="PERL5LIB=/home/rmiller/ndn/perl prove -v"
+alias ndntest="PERL5LIB=/home/rmiller/ndn/perl prove -v"

@@ -1,0 +1,26 @@
+[user]
+    name = Randall Miller
+    email = randallsm83@gmail.com
+[core]
+    editor = vim
+[color]
+    ui = true
+    diff = true
+[init]
+    defaultBranch = master
+[push]
+    autoSetupRemote = true
+[grep]
+    lineNumber = true
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+[color "diff"]
+    meta = yellow
+    frag = magenta bold
+    commit = yellow bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse

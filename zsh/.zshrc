@@ -58,12 +58,19 @@ zplug load
 
 # ========================= General Settings =========================
 # History settings
-HISTFILE=~/.zsh_history
-HISTSIZE=500000
-SAVEHIST=500000
-setopt appendhistory
-setopt INC_APPEND_HISTORY
-setopt SHARE_HISTORY
+HISTFILE=~/.zsh_history              # Where to save the command history
+HISTSIZE=500000                      # Number of lines kept in memory
+SAVEHIST=500000                      # Number of lines to save in history file
+setopt appendhistory                 # Append to history file, do not overwrite
+setopt INC_APPEND_HISTORY            # Write to history file immediately
+setopt SHARE_HISTORY                 # Share history across all sessions
+setopt HIST_IGNORE_SPACE             # Ignore commands with leading spaces
+setopt HIST_REDUCE_BLANKS            # Remove unnecessary blanks
+setopt HIST_IGNORE_DUPS              # Ignore duplicate commands
+setopt HIST_FIND_NO_DUPS             # Do not display old duplicates in history search
+setopt HIST_SAVE_NO_DUPS             # Do not save duplicate commands in history
+setopt HIST_VERIFY                   # Don't execute immediately upon history expansion
+setopt EXTENDED_HISTORY              # Record command execution time
 
 # Environment variables
 export EDITOR='vim'

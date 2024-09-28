@@ -3,25 +3,37 @@
 # Define variables
 DOTFILES_REPO="https://github.com/Randallsm83/dotfiles.git"
 DOTFILES_DIR="$HOME/dotfiles"
-STOW_VERSION="latest"
 STOW_DIR="$HOME/.local/bin"
+STOW_INSTALL_DIR="$HOME/.local"
+STOW_URL_BASE="https://ftp.gnu.org/gnu/stow"
+STOW_VERSION=$(get_latest_stow_version)
 STOW_TAR="stow-$STOW_VERSION.tar.gz"
-STOW_URL="https://ftp.gnu.org/gnu/stow/$STOW_TAR"
+STOW_URL="$STOW_URL_BASE/$STOW_TAR"
+
+
+# Function to get the latest GNU Stow version number
+get_latest_stow_version() {
+    # Fetch the index page of the FTP directory and find the latest version
+    wget -qO- "$STOW_URL_BASE/" | grep -oP 'stow-\K[0-9.]+(?=.tar.gz)' | sort -V | tail -1
+}
 
 # Function to install GNU Stow locally
 install_stow() {
     echo "Installing GNU Stow locally..."
 
+    echo "Latest GNU Stow version: $STOW_VERSION"
+
     # Create directories
     mkdir -p "$STOW_DIR" "$HOME/.local"
 
     # Download and extract GNU Stow
+    echo "Downloading GNU Stow from $STOW_URL..."
     wget "$STOW_URL" -O "$STOW_TAR"
     tar -xf "$STOW_TAR"
     cd "stow-$STOW_VERSION" || exit
 
     # Install Stow locally in ~/.local
-    perl Makefile.PL --prefix="$HOME/.local" && make && make install
+    perl Makefile.PL --prefix="$STOW_INSTALL_DIR" && make && make install
 
     # Clean up
     cd ..
@@ -29,6 +41,7 @@ install_stow() {
 
     echo "GNU Stow installed locally at $STOW_DIR"
 }
+
 
 # Function to clone dotfiles repository
 clone_dotfiles() {
@@ -55,10 +68,9 @@ stow_dotfiles() {
         export PATH="$HOME/.local/bin:$PATH"
     fi
 
-    # Change to dotfiles directory
     cd "$DOTFILES_DIR" || exit
 
-    # Use stow to create symlinks for each directory (adjust as needed)
+    # Use stow to create symlinks for each directory
     for dir in */; do
         stow -v -t ~ "$dir"
     done

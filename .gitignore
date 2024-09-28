@@ -1,5 +1,2 @@
 # Ignore all .git directories by default
 **/.git
-
-# But not the config file in ndn/projects/ndn/.git/config
-!ndn/projects/ndn/.git/config

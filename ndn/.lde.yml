@@ -22,8 +22,9 @@ projects:
     # - NDN_DEV_ALL: 'true'
     #
     # ----- Panel > React UI Apps
+    # - NDN_DEV_AI_SEARCH_BAR: 'true'
     # - NDN_DEV_AI_DASHBOARD: 'true'
-    - NDN_DEV_PANEL_NAVIGATION: 'true'
+    # - NDN_DEV_PANEL_NAVIGATION: 'true'
     # - NDN_DEV_DOMAINS: 'true'
     # - NDN_DEV_GSUITE: 'true'
     # - NDN_DEV_ONBOARDING: 'true'
@@ -47,6 +48,13 @@ projects:
 
 ### Panel
 
+  #TODO DOES THIS WORK?
+  # - NDN_DEV_AI_SEARCH_BAR: 'true' -- makes ndn use dev js generated from here
+  # ai-search-bar:
+    # enable: 'true'
+    # repo: git@git.dreamhost.com:dreamhost/panel/ai-search-bar.git
+    # path: '~/projects/ai-search-bar'
+
   # # - NDN_DEV_AI_DASHBOARD: 'true' -- makes ndn use dev js generated from here
   # ai-dashboard:
   #   repo: git@git.dreamhost.com:dreamhost/panel/ai-dashboard.git
@@ -61,9 +69,10 @@ projects:
   # #  - LOCIZE_API_KEY: '6899b4bc-bd45-43ac-b762-bb013a21158b'
 
   # # - NDN_DEV_PANEL_NAVIGATION: 'true' -- makes ndn use dev js generated from here
-  panel-navigation:
-    repo: git@git.dreamhost.com:dreamhost/panel-navigation-js.git
-    path: 'panel-navigation-js'
+  # panel-navigation:
+    # enable: 'true'
+    # repo: git@git.dreamhost.com:dreamhost/panel-navigation-js.git
+    # path: 'panel-navigation-js'
     # env_vars:
     #  - API2_PATH: '/ndn'
     #  - API2_LOGIN_PUBLIC_PATH: '${API2_PATH:-/ndn}/dhwebpanel/'

@@ -127,20 +127,6 @@ function! ALEFixRange() range
 endfunction
 
 " ========================= General Settings =========================
-set backup
-set showcmd
-set mouse=a
-set showmatch
-set incsearch
-set hlsearch
-set scrolloff=8
-set wrap cindent
-set numberwidth=2
-set number relativenumber
-set directory=~/.vim/swp//
-set backupdir=~/.vim/backup//
-set backspace=indent,eol,start
-
 " Set mapleader
 let mapleader=','
 
@@ -154,6 +140,21 @@ endif
 if filewritable(s:vim_cache) == 0 && exists("*mkdir")
     call mkdir(s:vim_cache, "p", 0700)
 endif
+
+set backup
+set showcmd
+set mouse=a
+set showmatch
+set incsearch
+set hlsearch
+set splitright
+set scrolloff=8
+set wrap cindent
+set numberwidth=2
+set number relativenumber
+set directory=~/.vim/swp//
+set backupdir=~/.vim/backup//
+set backspace=indent,eol,start
 
 " ========================= Key Mappings =========================
 " Toggle search highlighting

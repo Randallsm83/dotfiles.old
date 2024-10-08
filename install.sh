@@ -93,7 +93,7 @@ clone_dotfiles() {
 
         # Pull latest changes
         echo "Pulling latest changes from repository..."
-        git pull --rebase origin main
+        git pull --rebase origin master
     else
         git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
     fi

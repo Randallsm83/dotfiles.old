@@ -93,7 +93,7 @@ clone_dotfiles() {
 
         # Pull latest changes
         echo "Pulling latest changes from repository..."
-        git pull --rebase origin master
+        git pull --rebase origin main
     else
         git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
     fi
@@ -111,25 +111,28 @@ restore_stashed_changes() {
     fi
 }
 
-# Function to back up existing files before stowing
-backup_existing_files() {
+# Function to back up conflicting files during stow operation
+backup_conflicting_files() {
+    local conflicting_dir="$1"
     local backup_dir="$HOME/dotfiles_backup"
     mkdir -p "$backup_dir"
-    echo "Backing up existing dotfiles to $backup_dir"
+    echo "Backing up existing dotfiles from $HOME to $backup_dir"
 
-    # Backup existing files that are not symlinks
-    cd "$DOTFILES_DIR" || exit
-    for dir in */; do
-        for file in "$HOME/${dir%/}"/*; do
-            if [ -e "$file" ] && [ ! -L "$file" ]; then
-                echo "Backing up $file to $backup_dir"
-                mv "$file" "$backup_dir"
-            fi
-        done
+    # Check for conflicts in the home directory and back them up
+    for file in "$DOTFILES_DIR/$conflicting_dir"/*; do
+        filename="$(basename "$file")"
+        home_file="$HOME/$filename"
+
+        # If the file exists in home and is not a symlink, back it up
+        if [ -e "$home_file" ] && [ ! -L "$home_file" ]; then
+            echo "Backing up $home_file to $backup_dir"
+            mv "$home_file" "$backup_dir"
+        fi
     done
+    echo "Backup completed for $conflicting_dir."
 }
 
-# Function to create symlinks using stow
+# Function to create symlinks using stow with options for handling conflicts
 stow_dotfiles() {
     echo "Creating symlinks with GNU Stow..."
 
@@ -143,7 +146,44 @@ stow_dotfiles() {
     # Use stow to create symlinks for each directory
     for dir in */; do
         echo "Stowing $dir"
-        stow --override=~ -v -t ~ "$dir"
+
+        # Check if there are conflicting files before stowing
+        if stow --override=~ -n -v -t ~ "$dir" 2>&1 | grep -q "would cause conflicts"; then
+            echo "Conflicts detected for $dir:"
+            stow --override=~ -n -v -t ~ "$dir"
+
+            # Print what each option will do
+            echo "Options:"
+            echo "  (s)kip: Do not stow $dir."
+            echo "  (b)ackup: Move conflicting files in $HOME to $HOME/dotfiles_backup and then stow $dir."
+            echo "  (a)dopt: Make stow take control of existing conflicting files."
+            echo "  (o)verwrite: Forcefully replace conflicting files with symlinks from $dir."
+            read -r -p "Choose an option: [s/b/a/o]: " choice
+
+            case $choice in
+                s|S)
+                    echo "Skipping $dir..."
+                    ;;
+                b|B)
+                    echo "Backing up conflicting files for $dir..."
+                    backup_conflicting_files "$dir"
+                    stow --override=~ -v -t ~ "$dir"
+                    ;;
+                a|A)
+                    echo "Adopting existing files for $dir..."
+                    stow --override=~ --adopt -v -t ~ "$dir"
+                    ;;
+                o|O)
+                    echo "Overwriting existing files for $dir..."
+                    stow --override=~ --force -v -t ~ "$dir"
+                    ;;
+                *)
+                    echo "Invalid choice. Skipping $dir..."
+                    ;;
+            esac
+        else
+            stow --override=~ -v -t ~ "$dir"
+        fi
     done
 
     echo "Symlinks created successfully."
@@ -168,14 +208,10 @@ check_stow_installation
 # Clone dotfiles repository and handle any local changes
 clone_dotfiles
 
-# Back up existing files if needed
-backup_existing_files
-
-# Create symlinks using GNU Stow
+# Create symlinks using GNU Stow and handle conflicts dynamically
 stow_dotfiles
 
 # Restore stashed changes, if any
 restore_stashed_changes
 
 echo "Dotfiles setup completed!"
-

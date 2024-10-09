@@ -6,8 +6,8 @@ set -euo pipefail
 # Define variables
 DOTFILES_REPO="https://github.com/Randallsm83/dotfiles.git"
 DOTFILES_DIR="$HOME/dotfiles"
-LOCAL_BIN="$HOME/.local/bin"
-LOCAL_DIR="$HOME/.local"
+LOCAL_BIN="$HOME/local/bin"
+LOCAL_DIR="$HOME/local"
 STOW_URL_BASE="https://ftp.gnu.org/gnu/stow"
 DEPENDENCIES=("wget" "tar" "git" "make" "gcc")
 
@@ -45,7 +45,7 @@ install_stow() {
     tar -xf "$STOW_TAR"
     cd "stow-$STOW_VERSION" || exit
 
-    # Install Stow locally in ~/.local
+    # Install Stow locally in ~/local
     ./configure --prefix="$LOCAL_DIR"
     make -j$(nproc)
     make install
@@ -133,7 +133,7 @@ backup_existing_files() {
 stow_dotfiles() {
     echo "Creating symlinks with GNU Stow..."
 
-    # Add ~/.local/bin to PATH if it's not already there
+    # Add ~/local/bin to PATH if it's not already there
     if [[ ":$PATH:" != *":$LOCAL_BIN:"* ]]; then
         export PATH="$LOCAL_BIN:$PATH"
     fi

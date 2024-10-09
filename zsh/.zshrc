@@ -33,7 +33,7 @@ zplug "plugins/common-aliases", from:oh-my-zsh
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-history-substring-search", defer:2
 
 # ---- Supercrab Tree ---------
 zplug "supercrabtree/k"
